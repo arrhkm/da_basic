@@ -5,28 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Employee;
-use yii\db\ActiveRecord;
+use app\models\Phone;
 
-Class PhoneRecord extends ActiveRecord
-{
-    public static function tableName()
-    {
-        return 'phone';
-    }
-    public function rules()
-    {
-        return [
-            [['id'], 'number'],
-            [['number'], 'number'],
-            [[['employee_id'], 'number'], 'required'],
-        ];
-    }
-}
 /**
- * EmployeeModel represents the model behind the search form about `app\models\Employee`.
+ * PhoneSearch represents the model behind the search form about `app\models\Phone`.
  */
-class EmployeeModel extends Employee
+class PhoneSearch extends Phone
 {
     /**
      * @inheritdoc
@@ -34,8 +18,8 @@ class EmployeeModel extends Employee
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name', 'bod', 'note'], 'safe'],
+            [['id', 'employee_id'], 'integer'],
+            [['number'], 'safe'],
         ];
     }
 
@@ -57,7 +41,7 @@ class EmployeeModel extends Employee
      */
     public function search($params)
     {
-        $query = Employee::find();
+        $query = Phone::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -73,11 +57,10 @@ class EmployeeModel extends Employee
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'bod' => $this->bod,
+            'employee_id' => $this->employee_id,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'note', $this->note]);
+        $query->andFilterWhere(['like', 'number', $this->number]);
 
         return $dataProvider;
     }

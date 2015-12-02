@@ -3,15 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\EmployeeModel;
+use app\models\Phone;
+use app\models\PhoneSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EmployeeController implements the CRUD actions for Employee model.
+ * PhoneController implements the CRUD actions for Phone model.
  */
-class EmployeeController extends Controller
+class PhoneController extends Controller
 {
     public function behaviors()
     {
@@ -26,12 +27,12 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Lists all Employee models.
+     * Lists all Phone models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new EmployeeModel();
+        $searchModel = new PhoneSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -41,7 +42,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Displays a single Employee model.
+     * Displays a single Phone model.
      * @param integer $id
      * @return mixed
      */
@@ -53,13 +54,13 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Creates a new Employee model.
+     * Creates a new Phone model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Employee();
+        $model = new Phone();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -71,7 +72,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Updates an existing Employee model.
+     * Updates an existing Phone model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -90,7 +91,7 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Deletes an existing Employee model.
+     * Deletes an existing Phone model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -103,15 +104,15 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Finds the Employee model based on its primary key value.
+     * Finds the Phone model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Employee the loaded model
+     * @return Phone the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Employee::findOne($id)) !== null) {
+        if (($model = Phone::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
